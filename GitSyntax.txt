@@ -1,0 +1,184 @@
+jadii
+---------------
+---Git fundemental structure
+git init => initiate in folder we selected but cd
+git add => staged untrack file
+git add ./-A => staged all the unstages file
+git diff --staged => shows what changed in files and compare it to previous version
+git commit -m " " => commit the staged files
+git diff HEAD => campare the changes in HEAD
+(red -> before changes) (green -> after changes)
+git show <hash file> => shows all file and changes
+----------
+----unstage & modifie & remove
+----------
+git commit --amend -m "message" => modifiying the staged file
+**HEAD must be on specific file
+git checkout -- <file name> => discard the file
+git reset <file name> => retrieves the file 
+git reset HEAD~1 => undo the most recent commit
+git reset --hard HEAD~1 => undo most recent commit and unstaged the changes 
+ plus discared the changes
+**git rm <file name> => remove the file
+
+git log --diff-filter=D --summary => find the commit where the file was deleted
+git checkout <commit hash>^ --<file path> => restor the file from the commit 
+ before it was deleted
+  **the caret (^) indicates the commit before the deletion
+git rev-list -n 1 head -- <file-path> => if we arn't sure about commit hash 
+  this command can find the last commit that affected the given path 
+------------------
+------branching
+-----------
+git branch => shows branches
+git branch <new branch name> => create new branch
+git checkout <branch name> => switch branch
+git switch <branch name> => switch branch
+git merge <branch name>  => mix mranch to master
+git -d <branch name> => delete the branch 
+git -D <branch name> => delete branch even before ehough merge
+
+--------------
+---GitHub 
+-----------
+git remote => shows your remote files
+git remote -v => shows more details of file
+git remote add origin http address => add to origin
+git clone <git http address> => dowmload the file in address
+git push origin master => push the file to GH / remote
+git pull origin master => chenges in remote will appear in local master
+ 
+---------
+-------conflict
+---------
+when changes happend in a file from twoo person =both modified
+
+these  signs shows my changes
+====================
+<<<<<<<<<<<<<<<
+
+these signs show server or remote changed
+=================
+>>>>>>>>>>>>>>>>>>> (hash of commit)
+
+by eracing these signs it will commit
+
+
+ohmyzch
+
+
+
+
+
+--------create tags
+-----------
+git tag -a <symbolls version> -m " message " => a tag for our commit
+-a => for anotate the tag
+git tag -a <symboll > half if hash => create the version 
+git tag -d <tag_name> => delete a local tag name
+git tag -L "first letter of tag*" => it looks for all tag with the letter we requested
+git checkout <tag symboll> => change head to specific tag
+
+----------
+-------tag to remote
+----------
+git push origin --tags  => push all tags
+git push origin <tag symboll> => specific tag push 
+git push --delete origin < tag_name> => delete a Remote Git tag name
+git push origin :refs/tags <tag_name> => ensures deleting git a tag not a branch 
+---------------------------------------------
+---------------------**signing public and secret key**
+------create signing key
+------set sec uid/ signingkey
+------delete signing key
+------sign tag
+------sign commit
+---------------------------
+
+hints
+**
+1.the GPG agent
+gpgconf --kill gpg-agent => Restar GPG agent
+its a daemon that manage secret(private)keys independently from 
+any protocol. It is used as a backend for operations that require a private key,
+such signing or decryption.
+
+
+2. Test GPG
+echo "test" | gpg --clearsign => using to test GPG by creating a clear-signed message.
+
+a clear-signed message is one where the text of the message is readableand a digital 
+signature is appended to the end
+
+
+
+
+
+-----create signingkey
+----
+gpg --gen-key => it creates keys
+gpg --full-generate-key =>creates key
+gpg --list-keys => shows public keys
+gpg --list-secret-keys => shows secret/private keys 
+gpg config --global user.signingkey => shows our sign key
+gpg --list-secret-keys miladzanos@gmail.com => list of secret keys for specific email
+gpg --list-secret-keys --keyid-format LONG => reveals secret <uid>
+
+------------
+----set signingkey
+------------
+git config --global user.signingkey<sec/secret key> =>set the signign key
+git config --local user.signingkey<sec/secrettkey> =>ensure set the signing key in local
+git config --global user.signingkey => shows our sign key
+*git config --global --unset user.signingkey =>unset the current signingkey
+
+-----------
+----delete signingkey
+-----------
+gpg --delete-secret-key[uid]=> using userID for deleting the private GPG key
+gpg --delete-key[uid]=> deleting the public GPG key
+gpg --delete-secret-key [keyID] => use key identifier
+gpg --delete-key [keyId] => use key identifier
+
+-----------
+--------tag and sign a commit
+-----------
+git tag <tag name> => create a tag
+*git tag -d <tag name> => delete tag
+git tag -s <version symboll> -m " "=> sign our tag
+git show <version symboll> => shows our sign tag
+git tag -v <version symboll> => shows who tag the version and when veryfied
+
+----------
+---sing and delete commit 
+----------
+git tag -S -m "  " =>sign our commit 
+*git config --global commit.gpgsign false => disable GPG sign in key for commit
+---------------------------------------------------------
+--------------------session 11
+---git blame
+---bisect => binary search commit
+----------------------
+----git blame
+it sohws how did the code in history even select a specific line
+is avilable for it.
+
+cd => current folder
+ls => sohws all files
+cat <specific file> => shows all codes in it
+
+git blame <file name > shows all history of coding
+git blame <file name (-L)line> shows the specific line history
+
+----bisect start/bad/good
+
+ git bisect start => it start checkes and reveals when a buge had been happed
+ git bisect bad => it sad that the situation taht i'm here now in present it's bead
+ git bisect good <hash commit> => it shows clean and good files
+  after all these command and search by 'bisect'
+  as a result it reveals a hash commit to check by us we select 
+  the good 'Hash commit' after every suggetion from 'bisect'
+  unti the bad and buge find
+
+  git bisect reset => rest and finish bisect
+   
