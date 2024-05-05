@@ -1,6 +1,6 @@
-jadii
 ---------------
 ---Git fundemental structure
+---------------
 git init => initiate in folder we selected but cd
 git add => staged untrack file
 git add ./-A => staged all the unstages file
@@ -13,7 +13,7 @@ git show <hash file> => shows all file and changes
 ----unstage & modifie & remove
 ----------
 git commit --amend -m "message" => modifiying the staged file
-**HEAD must be on specific file
+**HEAD must be on the specific file
 git checkout -- <file name> => discard the file
 git reset <file name> => retrieves the file 
 git reset HEAD~1 => undo the most recent commit
@@ -25,22 +25,22 @@ git log --diff-filter=D --summary => find the commit where the file was deleted
 git checkout <commit hash>^ --<file path> => restor the file from the commit 
  before it was deleted
   **the caret (^) indicates the commit before the deletion
-git rev-list -n 1 head -- <file-path> => if we arn't sure about commit hash 
+git rev-list -n 1 head -- <file-path> => if we aren't sure about commit hash 
   this command can find the last commit that affected the given path 
 ------------------
 ------branching
 -----------
 git branch => shows branches
-git branch <new branch name> => create new branch
+git branch <new branch name> => create a new branch
 git checkout <branch name> => switch branch
 git switch <branch name> => switch branch
-git merge <branch name>  => mix mranch to master
+git merge <branch name>  => mix branch to master branch
 git -d <branch name> => delete the branch 
 git -D <branch name> => delete branch even before ehough merge
 
 --------------
 ---GitHub 
------------
+--------------
 git remote => shows your remote files
 git remote -v => shows more details of file
 git remote add origin http address => add to origin
@@ -64,14 +64,9 @@ these signs show server or remote changed
 by eracing these signs it will commit
 
 
-ohmyzch
-
-
-
-
-
---------create tags
------------
+--------------------
+--------**create tags
+--------------------
 git tag -a <symbolls version> -m " message " => a tag for our commit
 -a => for anotate the tag
 git tag -a <symboll > half if hash => create the version 
@@ -141,7 +136,7 @@ gpg --delete-secret-key [keyID] => use key identifier
 gpg --delete-key [keyId] => use key identifier
 
 -----------
---------tag and sign a commit
+----tag and sign a commit
 -----------
 git tag <tag name> => create a tag
 *git tag -d <tag name> => delete tag
@@ -150,14 +145,14 @@ git show <version symboll> => shows our sign tag
 git tag -v <version symboll> => shows who tag the version and when veryfied
 
 ----------
----sing and delete commit 
+----sing and delete commit 
 ----------
 git tag -S -m "  " =>sign our commit 
 *git config --global commit.gpgsign false => disable GPG sign in key for commit
 ---------------------------------------------------------
 --------------------session 11
----git blame
----bisect => binary search commit
+----git blame
+----bisect => binary search commit
 ----------------------
 ----git blame
 it sohws how did the code in history even select a specific line
